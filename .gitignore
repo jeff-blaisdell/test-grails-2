@@ -1,0 +1,29 @@
+# Plugins / linked directories
+/plugins
+/web-app/plugins
+
+
+# logs
+stacktrace.log
+/logs/
+
+# compiled files
+/target/
+/web-app/WEB-INF/classes
+
+# Eclipse files
+/.settings
+/.classpath
+/.project
+/eclipse/
+/target-eclipse
+
+# IntelliJ files
+*.iws
+*.iml
+.idea
+/out
+*.ipr
+
+# Mac OS files
+.DS_Store
