@@ -12,6 +12,10 @@ class BookControllerSpec extends Specification {
     void "index should return 1 book"() {
         setup:
         Book book = new Book(title: 'ABC', author: 'Jack')
+
+        /**
+         * Call to save() causes java.lang.StackOverflowError.
+         */
         book.save()
 
         when:
