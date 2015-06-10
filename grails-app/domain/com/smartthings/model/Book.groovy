@@ -17,6 +17,11 @@ class Book {
         isbn nullable: true
     }
 
+    // Causes StackOverflowException during test, but works when running app normally.
+    // The implementation returned by createCriteria() differs between test vs normal app execution.
+    // test impl flushes, normal app impl does not flush.
+    // flushing causes issue documented here:
+    // https://grails.github.io/grails-doc/2.3.11/guide/GORM.html#eventsAutoTimestamping
     void beforeInsert() {
         def lastIsbn = createCriteria().get {
             projections {
@@ -35,6 +40,8 @@ class Book {
     // The flush causes hibernate events to fire which result in circular
     // execution and ultimately a StackOverflowException.
     // Using withNewSession isolates the execution preventing the circular behavior.
+    // withNewSession usage is documented here:
+    // https://grails.github.io/grails-doc/2.3.11/guide/GORM.html#eventsAutoTimestamping - beforeDelete
 
     void beforeInsert() {
         withNewSession {
